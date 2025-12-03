@@ -20,7 +20,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export default function Login({ onClose }) {
 const navigate = useNavigate();
 
-  const [values, setValues] = useState({ email: "sky112@gmail.com", password: "SKYDECK" });
+  const [values, setValues] = useState({ email: "example@gmail.com", password: "*****" });
   const [showPassword, setShowPassword] = useState(false);
 
   //  Single handleChange function

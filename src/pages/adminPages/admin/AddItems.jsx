@@ -77,109 +77,131 @@ const AddItems = () => {
           </Typography>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Grid container spacing={2}>
+            {/* Row 1: Food Name + Category */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Food Name */}
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Food Name"
+              <div className="relative">
+                <input
+                  type="text"
                   name="fname"
-                  size="small"
                   value={formData.fname}
                   onChange={handleChange}
-                  variant="outlined"
                   required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all peer"
+                  placeholder=" "
                 />
-              </Grid>
+                <label className="absolute left-4 top-3 px-1 text-gray-500 transition-all duration-200 transform -translate-y-6 scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white pointer-events-none">
+                  Food Name *
+                </label>
+              </div>
 
               {/* Category */}
-              <Grid item xs={12} md={6}>
-                <TextField
-                  select
-                  fullWidth
-                  label="Category"
+              <div className="relative">
+                <select
                   name="category"
-                  size="small"
                   value={formData.category || ""}
                   onChange={handleChange}
-                  variant="outlined"
                   required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none peer"
                 >
-                  <MenuItem value="">
-                    <em>Select category</em>
-                  </MenuItem>
+                  <option value="" disabled hidden></option>
                   {categories.map((cat, i) => (
-                    <MenuItem key={i} value={cat}>
+                    <option key={i} value={cat}>
                       {cat}
-                    </MenuItem>
+                    </option>
                   ))}
-                </TextField>
-              </Grid>
-            </Grid>
+                </select>
+                <label className="absolute left-4 top-3 px-1 text-gray-500 transition-all duration-200 transform -translate-y-6 scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white pointer-events-none">
+                  Category *
+                </label>
+                {/* Dropdown arrow */}
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
 
             {/* Row 2: Price + Image */}
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Price */}
+              <div className="relative">
+                <input
                   type="number"
-                  label="Price (Rs.)"
                   name="price"
-                  size="small"
                   value={formData.price}
                   onChange={handleChange}
-                  variant="outlined"
                   required
+                  min="0"
+                  step="0.01"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all peer appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                  placeholder=" "
                 />
-              </Grid>
+                <label className="absolute left-4 top-3 px-1 text-gray-500 transition-all duration-200 transform -translate-y-6 scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white pointer-events-none">
+                  Price (Rs.) *
+                </label>
+              </div>
 
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  type="file"
-                  label="Upload Image"
-                  size="small"
-                  name="image"
-                  InputLabelProps={{ shrink: true }}
-                  inputProps={{ accept: "image/*" }}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
+              {/* Image Upload */}
+              <div className="relative">
+                <div className="relative">
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                    accept="image/*"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+                  />
+                  <label className="absolute left-4 top-3 px-1 text-gray-500 transition-all duration-200 transform -translate-y-6 scale-75 bg-white pointer-events-none">
+                    Upload Image
+                  </label>
+                </div>
+              </div>
+            </div>
 
             {/* Row 3: Ingredients */}
-            <TextField
-              fullWidth
-              label="Main Ingredients"
-              name="ingredients"
-              size="medium"
-              value={formData.ingredients}
-              onChange={handleChange}
-              variant="outlined"
-              required
-              multiline
-              rows={3}
-            />
+            <div className="relative">
+              <textarea
+                name="ingredients"
+                value={formData.ingredients}
+                onChange={handleChange}
+                required
+                rows={3}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all peer resize-none"
+                placeholder=" "
+              />
+              <label className="absolute left-4 top-3 px-1 text-gray-500 transition-all duration-200 transform -translate-y-6 scale-75 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white pointer-events-none">
+                Main Ingredients *
+              </label>
+            </div>
 
             {/* Buttons */}
-            <div className="flex gap-4 mt-3">
-              <Button
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+              <button
+                type="button"
                 onClick={() => navigate("/admin")}
-                variant="outlined"
-                fullWidth
-                className="!border-red-400 !text-red-500 hover:!bg-red-50 py-3 rounded-xl text-lg font-semibold"
+                className="w-full px-4 py-3 border-2 border-red-400 text-red-500 rounded-xl text-lg font-semibold hover:bg-red-50 transition-colors duration-200"
               >
                 ✖ Cancel
-              </Button>
-              <Button
+              </button>
+              <button
                 type="submit"
-                variant="contained"
-                fullWidth
                 disabled={mutation.isLoading}
-                className="!bg-orange-500 hover:!bg-orange-600 text-white py-3 rounded-xl text-lg font-semibold shadow-md"
+                className="w-full px-4 py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white rounded-xl text-lg font-semibold shadow-md transition-all duration-200"
               >
                 {mutation.isLoading ? "Adding..." : "➕ Add Item"}
-              </Button>
+              </button>
             </div>
           </form>
         </CardContent>
